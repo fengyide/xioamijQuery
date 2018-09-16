@@ -2,7 +2,7 @@
 * @Author: 123
 * @Date:   2018-09-13 16:39:22
 * @Last Modified by:   123
-* @Last Modified time: 2018-09-13 23:57:00
+* @Last Modified time: 2018-09-16 13:46:27
 */
 $(function(){
 	//购物车
@@ -394,7 +394,24 @@ $(function(){
 		now3=nex3=i;
 	})
 
-
+	let topText=document.querySelectorAll(".top-text1");
+	let topBox=document.querySelectorAll(".top-box");
+	// let xiala=document.querySelector(".xiala1");
+	// console.log(topText,topBox,xiala);
+	// xiala.onmouseenter=function(){
+		// xiala.style.height="250px";
+		for (let e=0;e<topText.length;e++){
+			topText[e].onmouseenter=function(){
+				for (let f=0;f<topBox.length;f++){
+					topBox[f].style.height=0;
+				}
+			topBox[e].style.height="250px";
+				// console.log(topBox[e]);
+			}
+			topText[e].onmouseleave=function(){
+				topBox[e].style.height="0";
+			}
+		}
 	//小米闪购开始
 	let content4=$(".movebox");
 	let leftbtn4=$(".leftbtN1");
@@ -439,4 +456,33 @@ $(function(){
 		}
 		content5.css("transform",`translate(${-(width3*time1)}px)`);
 	})
+
+
+
+
+	//倒计时
+	let box=document.querySelectorAll(".box1");
+	 let tt=setInterval(fn9,1000);
+	 function fn9(){
+	 	let arr=times();
+	 	box.forEach((e,i)=>{
+	 		e.innerHTML=arr[i];
+	 	})
+	 }
+	 fn9();
+	 function times(){
+	 let arr=[];
+	 let date=new Date();
+	 let day=new Date(2018,8,30);
+	 let time=Math.floor((day.getTime()-date.getTime())/1000); 
+	 let h=Math.floor((time%(60*60*24*30)%(60*60*24)/(60*60)));
+	 arr.push(h);
+	 let m=Math.floor((time%(60*60*24*30)%(60*60*24)%(60*60)/60));
+	 arr.push(m);
+	 let s=Math.floor((time%(60*60*24*30)%(60*60*24)%(60*60)%60));
+	 arr.push(s);
+	 // console.log(h,m,s,arr);
+	 return arr;
+	 }
+
 })
